@@ -1,2 +1,3 @@
-# bharatAdvisary
-Bharat advisaray deven
+# Bharat
+
+a [Sails](http://sailsjs.org) application

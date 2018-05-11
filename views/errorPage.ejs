@@ -1,0 +1,49 @@
+<div class="wrapper">
+  <%- partial ('admin/partials/header.ejs') %>
+  <%- partial ('admin/partials/aside.ejs') %>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Ooops!
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-yellow"> 404</h2>
+
+        <div class="error-content">
+          <h3><i class="fa fa-warning text-yellow"></i> Something went wrong.</h3>
+          <% if (typeof data !== 'undefined') { %>
+          <pre class="error"><code>
+            <%- data %>
+          </code></pre>
+          <% } else { %>
+            <p> Are you lost. Lets go back to dashboard
+               <a href="/dashboard">return to dashboard</a> or try using the search form.
+            </p>
+          <%}%>
+
+          <form class="search-form">
+            <div class="input-group">
+              <input type="text" name="search" class="form-control" placeholder="Search">
+
+              <div class="input-group-btn">
+                <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.input-group -->
+          </form>
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <%- partial ('admin/partials/footer.ejs') %>
+  <div class="control-sidebar-bg"></div>
+</div>
