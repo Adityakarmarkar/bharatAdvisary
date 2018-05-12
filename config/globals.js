@@ -63,4 +63,5 @@ module.exports.globals = {
 };
 module.exports.myGlobals = {
   salt:'$2a$10$0x/vXvP8xiGOuFIywC/ZWu',
+  jwtToken:'aditya|km'
 };
