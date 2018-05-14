@@ -24,6 +24,8 @@ var cssFilesToInject = [
   'bower_components/font-awesome/css/font-awesome.min.css',
   'bower_components/ionicons/css/ionicons.min.css',
   'plugins/datatables/dataTables.bootstrap.css',
+  'plugins/datepicker/datepicker3.css',
+  'plugins/sweetalert2/dist/sweetalert2.min.css',
   'styles/style.css'
 ];
 
@@ -40,6 +42,9 @@ var jsFilesToInject = [
   'dist/js/app.min.js',
   'plugins/datatables/jquery.dataTables.min.js',
   'plugins/datatables/dataTables.bootstrap.min.js',
+  'plugins/datepicker/bootstrap-datepicker.js',
+  'plugins/sweetalert2/dist/sweetalert2.min.js',
+  'js/moment.js',
   'js/script.js'
 ];
 

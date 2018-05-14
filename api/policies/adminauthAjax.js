@@ -3,7 +3,7 @@ module.exports = function (req, res, next) {
     return next();
   }else {
     req.flash('error', 'Session Timeout');
-    res.redirect('/');
+    res.send({status:'logout'});
     // return next();
   }
 };
