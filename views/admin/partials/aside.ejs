@@ -27,7 +27,7 @@
           <i class="fa fa-home"></i> <span>Dashboard</span>
         </a>
       </li>
-      <li class="treeview">
+      <li class="treeview <%=((typeof active != 'undefined' && (active == 'all' || active == 'active' || active == 'suspended'))? 'active' : '')%>">
         <a href="#">
           <i class="fa fa-users"></i> <span>Users</span>
           <span class="pull-right-container">
@@ -35,9 +35,21 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="active"><a href="/userlist/all"><i class="fa fa-circle-o"></i> All Users</a></li>
-          <li><a href="/userlist/all"><i class="fa fa-circle-o"></i> Active Users </a></li>
-          <li><a href="/userlist/all"><i class="fa fa-circle-o"></i> Suspended Users </a></li>
+          <li class="<%=((typeof active != 'undefined' && active == 'all')? 'active' : '')%>"><a href="/userlist/all"><i class="fa fa-circle-o"></i> All Users</a></li>
+          <li class="<%=((typeof active != 'undefined' && active == 'active')? 'active' : '')%>" ><a href="/userlist/active"><i class="fa fa-circle-o"></i> Active Users </a></li>
+          <li class="<%=((typeof active != 'undefined' && active == 'suspended')? 'active' : '')%>" ><a href="/userlist/suspended"><i class="fa fa-circle-o"></i> Suspended Users </a></li>
+        </ul>
+      </li>
+      <li class="treeview <%=((typeof active != 'undefined' && (active == 'listMCX' || active == 'createMCX'))? 'active' : '')%>">
+        <a href="#">
+          <i class="fa fa-line-chart"></i> <span>MCX Tips</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="<%=((typeof active != 'undefined' && active == 'listMCX')? 'active' : '')%>"><a href="/mcxscripts/list"><i class="fa fa-circle-o"></i> All Scripts</a></li>
+          <li class="<%=((typeof active != 'undefined' && active == 'createMCX')? 'active' : '')%>" ><a href="/mcxscripts/create"><i class="fa fa-circle-o"></i> Create Script </a></li>
         </ul>
       </li>
     </ul>

@@ -2,9 +2,16 @@ var moment = require('moment');
 var bcrypt = require('bcryptjs');
 module.exports = {
 	userlist:function (req, res) {
-		Appuser.find().exec(function (err, alluers) {
+		var param = req.params.all();
+		var condition = {};
+		if (param.filter && param.filter == 'active'){
+			condition['status'] = 'active';
+		} else if (param.filter && param.filter == 'suspended'){
+			condition['status'] = 'suspended';
+		}
+		Appuser.find(condition).exec(function (err, alluers) {
 			if (err){ res.serverError(err); }else {
-				res.view('admin/userlist',{layout:'layout', data:{users:alluers}, moment:moment, active:((req.param.filter) ? req.param.filter : 'all')});
+				res.view('admin/userlist',{layout:'layout', data:{users:alluers}, moment:moment, active:((param.filter) ? param.filter : 'all')});
 			}
 		});
 	},
@@ -46,6 +53,84 @@ module.exports = {
 			});
 		} else {
 			res.send({status:'error', data:{}, mess:'keys missing', error:{}})
+		}
+	},
+	suspendUser:function (req, res) {
+		var param = req.params.all();
+		if (param.UserId){
+			Appuser.findOne({id:param.UserId}).exec(function (err, oneUser) {
+				if (err){
+					res.send({status:'error'});
+				} else if (oneUser){
+					oneUser.status = 'suspended'
+					oneUser.save(function (err) {
+						if (err){
+							res.send({status:'error'});
+						} else { res.send({status:'success'}); }
+					});
+				} else { res.send({status:'error'}); }
+			});
+		} else {
+			res.send({status:'error'});
+		}
+	},
+	sustainUser:function (req, res) {
+		var param = req.params.all();
+		if (param.UserId){
+			Appuser.findOne({id:param.UserId}).exec(function (err, oneUser) {
+				if (err){
+					res.send({status:'error'});
+				} else if (oneUser){
+					oneUser.status = 'active'
+					oneUser.save(function (err) {
+						if (err){
+							res.send({status:'error'});
+						} else { res.send({status:'success'}); }
+					});
+				} else { res.send({status:'error'}); }
+			});
+		} else {
+			res.send({status:'error'});
+		}
+	},
+	setExpiration:function (req, res) {
+		var param = req.params.all();
+		if (param.UserId && param.date){
+			Appuser.findOne({id:param.UserId}).exec(function (err, oneUser) {
+				if (err){
+					res.send({status:'error'});
+				} else if (oneUser){
+					oneUser.expiryFlag = true;
+					oneUser.expiryDate = param.date;
+					oneUser.save(function (err) {
+						if (err){ res.send({status:'error'}); } else {
+							res.send({status:'success'});
+						}
+					});
+				} else { res.send({status:'error'}); }
+			});
+		} else {
+			res.send({status:'error'});
+		}
+	},
+	setAsExpired:function (req, res) {
+		var param = req.params.all();
+		if (param.UserId){
+			Appuser.findOne({id:param.UserId}).exec(function (err, oneUser) {
+				if (err){
+					res.send({status:'error'});
+				} else if (oneUser){
+					oneUser.expiryFlag = false;
+					oneUser.expiryDate = null;
+					oneUser.save(function (err) {
+						if (err){ res.send({status:'error'}); } else {
+							res.send({status:'success'});
+						}
+					});
+				} else { res.send({status:'error'}); }
+			});
+		} else {
+			res.send({status:'error'});
 		}
 	}
 };

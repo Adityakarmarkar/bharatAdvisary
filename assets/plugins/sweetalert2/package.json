@@ -1,0 +1,126 @@
+{
+  "_args": [
+    [
+      {
+        "name": "sweetalert2",
+        "raw": "sweetalert2@^4.0.12",
+        "rawSpec": "^4.0.12",
+        "scope": null,
+        "spec": ">=4.0.12 <5.0.0",
+        "type": "range"
+      },
+      "/Users/tushardhara/projects/ketaki_v2"
+    ]
+  ],
+  "_from": "sweetalert2@>=4.0.12 <5.0.0",
+  "_id": "sweetalert2@4.0.12",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/sweetalert2",
+  "_nodeVersion": "6.3.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/sweetalert2-4.0.12.tgz_1469102428888_0.3327922043390572"
+  },
+  "_npmUser": {
+    "email": "limon.monte@gmail.com",
+    "name": "limonte"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "sweetalert2",
+    "raw": "sweetalert2@^4.0.12",
+    "rawSpec": "^4.0.12",
+    "scope": null,
+    "spec": ">=4.0.12 <5.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-4.0.12.tgz",
+  "_shasum": "db5004ae115edb226777abd16488692d7a398b2a",
+  "_shrinkwrap": null,
+  "_spec": "sweetalert2@^4.0.12",
+  "_where": "/Users/tushardhara/projects/ketaki_v2",
+  "author": {
+    "email": "tristan.edwards@me.com",
+    "name": "Tristan Edwards",
+    "url": "http://tristanedwards.me"
+  },
+  "bugs": {
+    "url": "https://github.com/limonte/sweetalert2/issues"
+  },
+  "contributors": [
+    {
+      "email": "limon.monte@gmail.com",
+      "name": "Limon Monte",
+      "url": "https://limonte.github.io"
+    },
+    {
+      "email": "sam@samturrell.co.uk",
+      "name": "Sam Turrell",
+      "url": "http://samturrell.co.uk"
+    }
+  ],
+  "dependencies": {
+    "es6-promise": "latest"
+  },
+  "description": "A replacement for JavaScript's popup boxes, supported fork of sweetalert",
+  "devDependencies": {
+    "eslint": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-clean-css": "latest",
+    "gulp-eslint": "latest",
+    "gulp-qunit": "latest",
+    "gulp-rename": "latest",
+    "gulp-rollup": "latest",
+    "gulp-sass": "latest",
+    "gulp-uglify": "latest",
+    "rollup": "latest",
+    "uglify-js": "latest"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "db5004ae115edb226777abd16488692d7a398b2a",
+    "tarball": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-4.0.12.tgz"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "gitHead": "fb9f46c9b5b6242a688fbb67f256edd8aa607e05",
+  "homepage": "https://limonte.github.io/sweetalert2/",
+  "keywords": [
+    "sweetalert",
+    "sweetalert2",
+    "alert",
+    "prompt"
+  ],
+  "license": "MIT",
+  "main": "dist/sweetalert2.js",
+  "maintainers": [
+    {
+      "email": "limon.monte@gmail.com",
+      "name": "limonte"
+    }
+  ],
+  "name": "sweetalert2",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limonte/sweetalert2.git"
+  },
+  "scripts": {
+    "assume-dist-unchanged": "git ls-files dist | tr '\\n' ' ' | xargs git update-index --assume-unchanged",
+    "no-assume-dist-unchanged": "git ls-files dist | tr '\\n' ' ' | xargs git update-index --no-assume-unchanged",
+    "test": "gulp test"
+  },
+  "version": "4.0.12"
+}

@@ -38,8 +38,21 @@ module.exports.policies = {
     'dashboard':'adminauth'
   },
   AppuserController: {
-    'userlist':'adminauth'
+    'userlist':'adminauth',
+    'suspendUser':'adminauthAjax',
+    'sustainUser':'adminauthAjax',
+    'setExpiration':'adminauthAjax',
+    'setAsExpired':'adminauthAjax'
+  },
+  McxscriptsController:{
+    'create':'adminauth',
+    'createScript':'adminauth',
+    'list':'adminauth',
+    'deleteScript':'adminauth',
+    'editScript':'adminauth',
+    'editSaveScript':'adminauth'
   }
+
 
 		// Apply the `false` policy as the default for all of RabbitController's actions
 		// (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
