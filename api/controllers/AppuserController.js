@@ -21,7 +21,7 @@ module.exports = {
 	login:function (req, res) {
 		var param = req.params.all();
 		if (param.mobile && param.password){
-			User.findOne({or:[{mobile:param.mobile}, {userName:param.mobile}]}).exec(function (err, oneUser) {
+			Appuser.findOne({or:[{mobile:param.mobile}, {userName:param.mobile}]}).exec(function (err, oneUser) {
 				if (err){
 					res.send({status:'error', data:{}, mess:'Error while loggin in', error:err});
 				} else if (oneUser){
