@@ -29,6 +29,7 @@
                   <th>Mac</th>
                   <th>status</th>
                   <th>Created At</th>
+                  <th>expiration Date</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -43,6 +44,7 @@
                         <td><%=((val.macAddress) ? val.macAddress : '')%></td>
                         <td><%=((val.status) ? val.status : '')%></td>
                         <td><%=((moment && val.createdAt) ? moment(val.createdAt).format('DD-MMM-YYYY') : '')%></td>
+                        <td><%=((val.expiryFlag && moment && val.expiryDate) ? moment(val.expiryDate).format('DD-MMM-YYYY') : 'expired')%></td>
                         <td><button type="button" id="suspende" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Suspende User" ><i class="fa fa-user-times"></i></button></td>
                       </tr>
                     <%})%>

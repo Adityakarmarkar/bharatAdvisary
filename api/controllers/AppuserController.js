@@ -10,6 +10,11 @@ module.exports = {
 	},
 	register:function (req, res) {
 		var param = req.params.all();
+		param['expiryFlag'] = true;
+		// var date123 = new Date()
+		// console.log('date123',moment().add(5, 'days').toDate());
+		param['expiryDate'] = moment().add(5, 'days').toDate();
+		console.log('date123',param.expiryDate);
 		Appuser.create(param).exec(function (err, oneUers) {
 			if (err || _.isUndefined(oneUers)){
 				res.send({status:'error', data:{}, mess:'Error while creating user', error:err});
