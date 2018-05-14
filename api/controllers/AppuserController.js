@@ -2,7 +2,7 @@ var moment = require('moment');
 var bcrypt = require('bcryptjs');
 module.exports = {
 	userlist:function (req, res) {
-		User.find().exec(function (err, alluers) {
+		Appuser.find().exec(function (err, alluers) {
 			if (err){ res.serverError(err); }else {
 				res.view('admin/userlist',{layout:'layout', data:{users:alluers}, moment:moment, active:((req.param.filter) ? req.param.filter : 'all')});
 			}
@@ -10,7 +10,7 @@ module.exports = {
 	},
 	register:function (req, res) {
 		var param = req.params.all();
-		User.create(param).exec(function (err, oneUers) {
+		Appuser.create(param).exec(function (err, oneUers) {
 			if (err || _.isUndefined(oneUers)){
 				res.send({status:'error', data:{}, mess:'Error while creating user', error:err});
 			} else {
@@ -30,7 +30,7 @@ module.exports = {
 								res.send({status:'error', data:{}, mess:'Error while loggin in', error:err});
 							} else if (hash && hash === oneUser.password){
 								var token = TokenAuth.issueToken({mobile:oneUser.mobile},{});
-								res.send({status:'success', data:{user:oneUser, token:token}, mess:'User logged in', error:{}}); 
+								res.send({status:'success', data:{user:oneUser, token:token}, mess:'User logged in', error:{}});
 							} else {
 								res.send({status:'error', data:{}, mess:'Password missed matched', error:{}});
 							}
