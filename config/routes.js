@@ -45,7 +45,7 @@ module.exports.routes = {
     action: 'dashboard'
   },
   '/userlist/:filter':{
-    controller: 'user',
+    controller: 'appuser',
     action: 'userlist'
   },
   '/logout':{

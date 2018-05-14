@@ -37,7 +37,7 @@ module.exports.policies = {
 	AdminController: {
     'dashboard':'adminauth'
   },
-  UserController: {
+  AppuserController: {
     'userlist':'adminauth'
   }
 
