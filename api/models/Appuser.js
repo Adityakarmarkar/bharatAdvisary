@@ -37,6 +37,13 @@ module.exports = {
     password:{
       type:'string',
       required: true
+    },
+    expiryFlag:{
+      type:'boolean',
+      defaultsTo:false
+    },
+    expiryDate:{
+      type:'datetime'
     }
   },
   beforeCreate:function (user, cb) {
