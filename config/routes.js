@@ -48,6 +48,14 @@ module.exports.routes = {
     controller: 'appuser',
     action: 'userlist'
   },
+  '/ListMCXscripts':{
+    controller: 'mcxscripts',
+    action: 'lists'
+  },
+  '/newsList':{
+    controller: 'news',
+    action: 'newsList'
+  },
   '/logout':{
     controller: 'admin',
     action: 'logout'

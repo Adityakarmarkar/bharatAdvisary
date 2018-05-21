@@ -1,0 +1,93 @@
+<div class="wrapper">
+  <%- partial ('partials/header.ejs') %>
+  <%- partial ('partials/aside.ejs') %>
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+          All News
+        <small>List</small>
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-info">
+            <div class="overlay" id="overlayLoader" style="display:none;">
+                <i class="fa fa-refresh fa-spin"></i>
+              </div>
+            <%if(data.oneNews && data.oneNews.id){%>
+              <form action="/news/editmyNews" method="POST">
+              <input type="hidden" name="id" value="<%=data.oneNews.id%>"/>
+            <%} else {%>
+              <form action="/news/createNew" method="POST">
+            <%}%>
+              <div class="box-body">
+
+                <div class="form-group">
+                  <label>News Title</label>
+                  <input type="text" class="form-control" id="title_news" name="title" placeholder="Enter title" value="<%=((data.oneNews && data.oneNews.title) ? data.oneNews.title : '')%>" required>
+                </div>
+
+                <div class="form-group">
+                  <label>News Decription</label>
+                  <textarea class="form-control" id="title_decription" name="decription" rows="5" cols="80"><%=((data.oneNews && data.oneNews.decription) ? data.oneNews.decription : '')%></textarea>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="lang_change" name="language" value="true" <%=((data.oneNews && data.oneNews.language) ? 'checked' : '')%>> Convert to Hindi
+                  </label>
+                </div>
+
+              </div>
+              <div class="box-footer">
+                <!--<a type="button" href="/mcxscripts/list" class="btn btn-default">Cancel</a>-->
+                <button type="submit" class="btn btn-info pull-right">Save</button>
+              </div>
+            </form>
+          </div>
+          <div class="box">
+            <div class="box-body">
+              <table class="table table-bordered table-striped tablesort">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>createdAt</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <%if(data.allnews && data.allnews.length){%>
+                    <%_.each(data.allnews, function (val, index) {%>
+                      <tr>
+                        <td><%=index+1%></td>
+                        <td><%=((val.title) ? val.title : '')%></td>
+                        <td><%=((val.decription) ? val.decription : '')%></td>
+                        <td><%=((moment && val.createdAt) ? moment(val.createdAt).format('DD-MMM-YYYY') : '')%></td>
+                        <td>
+                          <a href="/news/editnews/<%=val.id%>" type="button" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Script" ><i class="fa fa-pencil-square-o"></i></a>
+                          <button type="button" class="btn btn-xs btn-danger deleteCustome" attr-href="/news/deletenews/<%=val.id%>" attr-title="Delete News" attr-decription="Are you sure you want to delete this News ?" data-toggle="tooltip" title="Delete News" ><i class="fa fa-trash"></i></button>
+                        </td>
+                      </tr>
+                    <%})%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+  </div>
+
+  <%- partial ('partials/footer.ejs') %>
+  <div class="control-sidebar-bg"></div>
+</div>
