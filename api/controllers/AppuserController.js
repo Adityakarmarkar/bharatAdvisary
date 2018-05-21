@@ -18,20 +18,34 @@ module.exports = {
 	register:function (req, res) {
 		var param = req.params.all();
 		param['expiryFlag'] = true;
-		// var date123 = new Date()
-		// console.log('date123',moment().add(5, 'days').toDate());
 		param['expiryDate'] = moment().add(5, 'days').toDate();
-		console.log('date123',param.expiryDate);
-		Appuser.create(param).exec(function (err, oneUers) {
-			if (err || _.isUndefined(oneUers)){
+
+		Appuser.findOne({or:[{userName:param.userName},{mobile:param.mobile}]}).exec(function (err, checkUser){
+			if (err){
 				res.send({status:'error', data:{}, mess:'Error while creating user', error:err});
+			} else if (checkUser){
+				if (checkUser.userName == param.userName){
+					res.send({status:'error', data:{}, mess:'Username already exsists', error:'unknown error'});
+				} else if (checkUser.mobile == param.mobile){
+					res.send({status:'error', data:{}, mess:'Mobile Number already exsists', error:'unknown error'});
+				} else {
+					res.send({status:'error', data:{}, mess:'Error while creating user', error:'unknown error'});
+				}
 			} else {
-				res.send({status:'success', data:oneUers, mess:'User Created successfully', error:{}});
+				Appuser.create(param).exec(function (err, oneUers) {
+					if (err || _.isUndefined(oneUers)){
+						console.log(err);
+						res.send({status:'error', data:{}, mess:'Error while creating user', error:err});
+					} else {
+						res.send({status:'success', data:oneUers, mess:'User Created successfully', error:{}});
+					}
+				});
 			}
 		});
 	},
 	login:function (req, res) {
 		var param = req.params.all();
+		console.log(param);
 		if (param.mobile && param.password){
 			Appuser.findOne({or:[{mobile:param.mobile}, {userName:param.mobile}]}).exec(function (err, oneUser) {
 				if (err){
@@ -42,7 +56,15 @@ module.exports = {
 								res.send({status:'error', data:{}, mess:'Error while loggin in', error:err});
 							} else if (hash && hash === oneUser.password){
 								var token = TokenAuth.issueToken({mobile:oneUser.mobile},{});
-								res.send({status:'success', data:{user:oneUser, token:token}, mess:'User logged in', error:{}});
+								if (param.fcmId){
+									oneUser.fcmId = param.fcmId;
+									oneUser.save(function(err){
+										if(err){ console.log(err); }
+										res.send({status:'success', data:{user:oneUser, token:token}, mess:'User logged in', error:{}});
+									})
+								} else {
+									res.send({status:'success', data:{user:oneUser, token:token}, mess:'User logged in', error:{}});
+								}
 							} else {
 								res.send({status:'error', data:{}, mess:'Password missed matched', error:{}});
 							}
