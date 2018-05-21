@@ -270,4 +270,76 @@ $(function () {
       );
     }
   });
+  $(document).on('ifChecked', '#lang_change', function (e) {
+    e.preventDefault();
+    $('#overlayLoader').show();
+    var text1 = $('#title_news').val();
+    text1 = (text1) ? text1 : ''
+    var text2 = $('#title_decription').val();
+    text2 = (text2) ? text2 : ''
+    $.ajax({
+      url: '/news/translateToHindi',
+      method: 'POST',
+      contentType: 'application/json',
+      processData: false,
+      data:JSON.stringify({text1:text1,text2:text2}),
+      success: function(responce){
+        $('#overlayLoader').hide();
+        if (responce.status && responce.status == 'success' && responce.data){
+          $('#title_news').val(((responce.data && responce.data.text1) ? responce.data.text1 : ''));
+          $('#title_decription').val(((responce.data && responce.data.text2) ? responce.data.text2 : ''));
+        } else {
+          swal(
+            'Error!',
+            'Error while convrting text',
+            'error'
+          );
+        }
+      },
+      error:function () {
+        $('#overlayLoader').hide();
+        swal(
+          'Error!',
+          'Error while convrting text',
+          'error'
+        );
+      }
+    });
+  });
+  $(document).on('ifUnchecked', '#lang_change', function (e) {
+    e.preventDefault();
+    $('#overlayLoader').show();
+    var text1 = $('#title_news').val();
+    text1 = (text1) ? text1 : ''
+    var text2 = $('#title_decription').val();
+    text2 = (text2) ? text2 : ''
+    $.ajax({
+      url: '/news/translateToEnglish',
+      method: 'POST',
+      contentType: 'application/json',
+      processData: false,
+      data:JSON.stringify({text1:text1,text2:text2}),
+      success: function(responce){
+        $('#overlayLoader').hide();
+        if (responce.status && responce.status == 'success' && responce.data){
+          $('#title_news').val(((responce.data && responce.data.text1) ? responce.data.text1 : ''));
+          $('#title_decription').val(((responce.data && responce.data.text2) ? responce.data.text2 : ''));
+        } else {
+          swal(
+            'Error!',
+            'Error while convrting text',
+            'error'
+          );
+        }
+      },
+      error:function () {
+        $('#overlayLoader').hide();
+        swal(
+          'Error!',
+          'Error while convrting text',
+          'error'
+        );
+      }
+    });
+  });
 });

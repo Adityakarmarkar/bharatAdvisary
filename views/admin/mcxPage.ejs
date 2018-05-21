@@ -5,13 +5,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        <%if(data.layout && data.layout == 'create'){%>
-          Create Script
-        <%} else if (data.layout && data.layout == 'edit'){%>
-            Edit Script
-        <%} else if (data.layout && data.layout == 'list'){%>
           All Scripts
-        <%}%>
         <small>MCX Tips</small>
       </h1>
     </section>
@@ -20,141 +14,113 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-            <%if(data.layout && (data.layout == 'create' || data.layout == 'edit')){%>
-                <div class="box box-info">
-                  <%if(data.layout && data.layout == 'edit' && data.oneScript && data.oneScript.id){%>
-                    <form class="form-horizontal" action="/mcxscripts/editSaveScript" method="POST">
-                    <input type="hidden" name="id" value="<%=data.oneScript.id%>"/>
-                  <%} else {%>
-                    <form class="form-horizontal" action="/mcxscripts/createScript" method="POST">
-                  <%}%>
-                    <div class="box-body">
+          <div class="box box-info">
+            <%if(data.layout && data.layout == 'edit' && data.oneScript && data.oneScript.id){%>
+              <form action="/mcxscripts/editSaveScript" method="POST">
+              <input type="hidden" name="id" value="<%=data.oneScript.id%>"/>
+            <%} else {%>
+              <form action="/mcxscripts/createScript" method="POST">
+            <%}%>
+              <div class="box-body">
 
-                      <div class="form-group">
-                        <label for="inputType1" class="col-sm-2 control-label">Script Name</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType1" name="name" placeholder="Enter Name of Script" value="<%=((data.oneScript && data.oneScript.name) ? data.oneScript.name : '')%>" required>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="inputType2" class="col-sm-2 control-label">Trend</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType2" name="trend" placeholder="Enter Trend" value="<%=((data.oneScript && data.oneScript.trend) ? data.oneScript.trend : '')%>" required>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="inputType3" class="col-sm-2 control-label">Entry Price</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType3" name="price" placeholder="Enter Price" value="<%=((data.oneScript && data.oneScript.price) ? data.oneScript.price : '')%>" required>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="inputType4" class="col-sm-2 control-label">Stop Loss</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType4" name="stoploss" placeholder="Enter Stop Loss Price" value="<%=((data.oneScript && data.oneScript.stoploss) ? data.oneScript.stoploss : '')%>">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="inputType5" class="col-sm-2 control-label">Target-1</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType5" name="target1" placeholder="Enter Target-1" value="<%=((data.oneScript && data.oneScript.target1) ? data.oneScript.target1 : '')%>" required>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="inputType6" class="col-sm-2 control-label">Target-2</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType6" name="target2" placeholder="Enter Target-2" value="<%=((data.oneScript && data.oneScript.target2) ? data.oneScript.target2 : '')%>">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="inputType7" class="col-sm-2 control-label">Rating</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputType7" name="rating" placeholder="Enter Rating" value="<%=((data.oneScript && data.oneScript.rating) ? data.oneScript.rating : '')%>">
-                        </div>
-                      </div>
-                      <%if(data.layout && data.layout == 'edit' && data.oneScript && data.oneScript.id){%>
-                        <div class="form-group">
-                          <label for="inputType8" class="col-sm-2 control-label">Remark</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputType8" name="remark" placeholder="Enter Remark" value="<%=((data.oneScript && data.oneScript.remark) ? data.oneScript.remark : '')%>">
-                          </div>
-                        </div>
-                      <%}%>
-
-                    </div>
-                    <div class="box-footer">
-                      <a type="button" href="/mcxscripts/list" class="btn btn-default">Cancel</a>
-                      <button type="submit" class="btn btn-info pull-right">Save</button>
-                    </div>
-                  </form>
+                <div class="form-group col-sm-3">
+                  <label>Script Name</label>
+                  <input type="text" class="form-control" id="inputType1" name="name" placeholder="Enter Name of Script" value="<%=((data.oneScript && data.oneScript.name) ? data.oneScript.name : '')%>" required>
                 </div>
-            <%} else if (data.layout && data.layout == 'list'){%>
-                <div class="box">
-                  <div class="box-body">
-                    <table class="table table-bordered table-striped tablesort">
-                      <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Created At</th>
-                        <th>Trend</th>
-                        <th>Entry Price</th>
-                        <th>StopLoss</th>
-                        <th>Target-1</th>
-                        <th>Target-2</th>
-                        <th>Rating</th>
-                        <th>Remark</th>
-                        <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                        <%if(data.scripts && data.scripts.length){%>
-                          <%_.each(data.scripts, function (val, index) {%>
-                            <tr>
-                              <td><%=index+1%></td>
-                              <td><%=((val.name) ? val.name : '')%></td>
-                              <td><%=((moment && val.createdAt) ? moment(val.createdAt).format('DD-MMM-YYYY') : '')%></td>
-                              <td><%=((val.trend) ? val.trend : '')%></td>
-                              <td><%=((val.price) ? val.price : '')%></td>
-                              <td><%=((val.stoploss) ? val.stoploss : '')%></td>
-                              <td><%=((val.target1) ? val.target1 : '')%></td>
-                              <td><%=((val.target2) ? val.target2 : '')%></td>
-                              <td><%=((val.rating) ? val.rating : '')%></td>
-                              <td><%=((val.remark) ? val.remark : '')%></td>
 
-                              <td>
-                                <a href="/mcxscripts/editScript/<%=val.id%>" type="button" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Script" ><i class="fa fa-pencil-square-o"></i></a>
-                                <button type="button" class="btn btn-xs btn-danger deleteCustome" attr-href="/mcxscripts/deleteScript/<%=val.id%>" attr-title="Delete Script" attr-decription="Are you sure you want to delete this script ?" data-toggle="tooltip" title="Delete Script" ><i class="fa fa-trash"></i></button>
-                              </td>
-                            </tr>
-                          <%})%>
-                        <%}%>
-                      </tbody>
-                      <tfoot>
-                      <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Created At</th>
-                      <th>Trend</th>
-                      <th>Entry Price</th>
-                      <th>StopLoss</th>
-                      <th>Target-1</th>
-                      <th>Target-2</th>
-                      <th>Rating</th>
-                      <th>Remark</th>
-                      <th>Action</th>
-                      </tr>
-                      </tfoot>
-                    </table>
+                <div class="form-group col-sm-3">
+                  <label>Trend</label>
+                  <select class="form-control" name="trend" required>
+                    <option <%=((data.oneScript && data.oneScript.trend && data.oneScript.trend == 'BUY') ? 'selected' : '')%> >BUY</option>
+                    <option <%=((data.oneScript && data.oneScript.trend && data.oneScript.trend == 'SELL') ? 'selected' : '')%> >SELL</option>
+                    <option <%=((data.oneScript && data.oneScript.trend && data.oneScript.trend == 'HOLD') ? 'selected' : '')%> >HOLD</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label>Entry Price</label>
+                  <input type="text" class="form-control" id="inputType3" name="price" placeholder="Enter Price" value="<%=((data.oneScript && data.oneScript.price) ? data.oneScript.price : '')%>" required>
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label>Stop Loss</label>
+                  <input type="text" class="form-control" id="inputType4" name="stoploss" placeholder="Enter Stop Loss Price" value="<%=((data.oneScript && data.oneScript.stoploss) ? data.oneScript.stoploss : '')%>">
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label>Target-1</label>
+                  <input type="text" class="form-control" id="inputType5" name="target1" placeholder="Enter Target-1" value="<%=((data.oneScript && data.oneScript.target1) ? data.oneScript.target1 : '')%>" required>
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label>Target-2</label>
+                  <input type="text" class="form-control" id="inputType6" name="target2" placeholder="Enter Target-2" value="<%=((data.oneScript && data.oneScript.target2) ? data.oneScript.target2 : '')%>">
+                </div>
+
+                <div class="form-group col-sm-3">
+                  <label>Rating</label>
+                  <input type="text" class="form-control" id="inputType7" name="rating" placeholder="Enter Rating" value="<%=((data.oneScript && data.oneScript.rating) ? data.oneScript.rating : '')%>">
+                </div>
+                <%if(data.layout && data.layout == 'edit' && data.oneScript && data.oneScript.id){%>
+                  <div class="form-group">
+                    <label for="inputType8" class="col-sm-2 control-label">Remark</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputType8" name="remark" placeholder="Enter Remark" value="<%=((data.oneScript && data.oneScript.remark) ? data.oneScript.remark : '')%>">
+                    </div>
                   </div>
-                </div>
-              <%}%>
+                <%}%>
+
+              </div>
+              <div class="box-footer">
+                <!--<a type="button" href="/mcxscripts/list" class="btn btn-default">Cancel</a>-->
+                <button type="submit" class="btn btn-info pull-right">Save</button>
+              </div>
+            </form>
+          </div>
+          <div class="box">
+            <div class="box-body">
+              <table class="table table-bordered table-striped tablesort">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Created At</th>
+                  <th>Trend</th>
+                  <th>Entry Price</th>
+                  <th>StopLoss</th>
+                  <th>Target-1</th>
+                  <th>Target-2</th>
+                  <th>Rating</th>
+                  <th>Remark</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <%if(data.scripts && data.scripts.length){%>
+                    <%_.each(data.scripts, function (val, index) {%>
+                      <tr>
+                        <td><%=index+1%></td>
+                        <td><%=((val.name) ? val.name : '')%></td>
+                        <td><%=((moment && val.createdAt) ? moment(val.createdAt).format('DD-MMM-YYYY') : '')%></td>
+                        <td><%=((val.trend) ? val.trend : '')%></td>
+                        <td><%=((val.price) ? val.price : '')%></td>
+                        <td><%=((val.stoploss) ? val.stoploss : '')%></td>
+                        <td><%=((val.target1) ? val.target1 : '')%></td>
+                        <td><%=((val.target2) ? val.target2 : '')%></td>
+                        <td><%=((val.rating) ? val.rating : '')%></td>
+                        <td><%=((val.remark) ? val.remark : '')%></td>
+
+                        <td>
+                          <a href="/mcxscripts/editScript/<%=val.id%>" type="button" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Script" ><i class="fa fa-pencil-square-o"></i></a>
+                          <button type="button" class="btn btn-xs btn-danger deleteCustome" attr-href="/mcxscripts/deleteScript/<%=val.id%>" attr-title="Delete Script" attr-decription="Are you sure you want to delete this script ?" data-toggle="tooltip" title="Delete Script" ><i class="fa fa-trash"></i></button>
+                        </td>
+                      </tr>
+                    <%})%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <!-- /.box -->
         </div>

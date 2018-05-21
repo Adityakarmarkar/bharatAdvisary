@@ -1,5 +1,19 @@
 var moment = require('moment');
 module.exports = {
+	lists:function (req, res) {
+		var sendData = {
+			layout : 'list',
+			scripts:[]
+		}
+		Mcxscripts.find().sort('createdAt DESC').exec(function (err, allMaxscript) {
+			if (err){ res.serverError(err); } else {
+				sendData.scripts = allMaxscript;
+				res.view('admin/mcxPage',{layout:'layout', data:sendData, moment:moment, active:'listMCX'});
+			}
+		});
+	},
+
+
 		create:function (req, res) {
 			var sendData = {
 				layout : 'create'
@@ -51,7 +65,12 @@ module.exports = {
 						res.serverError(err);
 					} else if (oneScript){
 						sendData.oneScript = oneScript;
-						res.view('admin/mcxPage',{layout:'layout', data:sendData, active:''});
+						Mcxscripts.find().sort('createdAt DESC').exec(function (err, allMaxscript) {
+							if (err){ res.serverError(err); } else {
+								sendData.scripts = allMaxscript;
+								res.view('admin/mcxPage',{layout:'layout', data:sendData, active:'', moment:moment});
+							}
+						});
 					} else { res.serverError('No Script found with such `id`'); }
 				});
 			} else {

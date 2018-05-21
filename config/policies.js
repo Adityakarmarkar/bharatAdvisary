@@ -45,13 +45,21 @@ module.exports.policies = {
     'setAsExpired':'adminauthAjax'
   },
   McxscriptsController:{
-    'create':'adminauth',
+    'list':'adminauth',
     'createScript':'adminauth',
     'list':'adminauth',
     'deleteScript':'adminauth',
     'editScript':'adminauth',
     'editSaveScript':'adminauth'
+  },
+  newsController:{
+    'newsList'    :'adminauth',
+    'editnews'    :'adminauth',
+    'createNew'   :'adminauth',
+    'deletenews'  :'adminauth',
+    'editmyNews'  :'adminauth'
   }
+
 
 
 		// Apply the `false` policy as the default for all of RabbitController's actions
