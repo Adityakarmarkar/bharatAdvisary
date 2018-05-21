@@ -21,8 +21,7 @@ module.exports = {
       required: true
     },
     fcmId:{
-      type:'string',
-      required: true
+      type:'string'
     },
     device:{
       type:'string',
