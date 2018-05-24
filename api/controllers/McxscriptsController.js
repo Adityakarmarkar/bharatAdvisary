@@ -22,10 +22,11 @@ module.exports = {
 		},
 		createScript:function (req, res) {
 			var param = req.params.all();
-			Mcxscripts.create(param).exec(function (err) {
-				if (err){ res.serverError(err); } else {
+			Mcxscripts.create(param).exec(function (err, oneScript) {
+				if (err){ res.serverError(err); } else if (oneScript){
+					Notification.sendScript(oneScript);
 					res.redirect('/mcxscripts/list');
-				}
+				} else { res.serverError('Error while creating script'); }
 			});
 		},
 		list:function (req, res) {
@@ -88,5 +89,14 @@ module.exports = {
 					}
 				});
 			} else { res.serverError('Unknown Script'); }
+		},
+		getScripts:function (req, res) {
+			Mcxscripts.find().sort('createdAt DESC').exec(function (err, allNews) {
+				if (err){
+					res.send({status:'error', data:{}, mess:'Error while retrieving data', error:err});
+				} else {
+					res.send({status:'success', data:allNews, mess:'', error:null});
+				}
+			});
 		}
 };

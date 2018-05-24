@@ -132,10 +132,11 @@ module.exports = {
 		},
 		createNew:function (req, res) {
 			var param = req.params.all();
-			News.create(param).exec(function (err) {
-				if (err){ res.serverError(err); } else {
+			News.create(param).exec(function (err, newNEws) {
+				if (err){ res.serverError(err); } else if (newNEws){
+					Notification.sendNews(newNEws);
 					res.redirect('/newsList');
-				}
+				} else { res.serverError('Error while creating NEWS'); }
 			})
 		},
 		deletenews:function (req, res) {
@@ -149,5 +150,14 @@ module.exports = {
 			} else {
 				res.serverError('Unknown news');
 			}
+		},
+		getNews:function (req, res) {
+			News.find().sort('createdAt DESC').exec(function (err, allNews) {
+				if (err){
+					res.send({status:'error', data:{}, mess:'Error while retrieving data', error:err});
+				} else {
+					res.send({status:'success', data:allNews, mess:'', error:null});
+				}
+			});
 		}
 };
