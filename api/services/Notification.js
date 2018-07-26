@@ -3,10 +3,11 @@ var options = {
   url: 'https://fcm.googleapis.com/fcm/send',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'key=AAAAHZ45PFs:APA91bEs1Vu3VXZlRm9ABmAYbvuk-ZMhj5bSg7fCORNP9CBqxwGgTGIk6jCA0oVeYSRLxgrhODucLKc3MPP7fh81CunxM0jtzmtf7vbS_0chakynXAKqPziZuetd8hQNj6zwR1HHPOXX'
+    'Authorization': 'key=AAAAZE9fzZw:APA91bFTYyvc8bT7WfJtNbuwSQ58f-5jhg-nkxxJl81UBrse3bPkTIO8tScdKnL0V-Iz7XIcY6MX3jzCAHXgSz1WdjMSpFj5zzJiq_eMzLYuQmlXSTRAuIw19WP4fTHQ_FnulnAdIG4a'
   },
   method:'POST'
 };
+
  module.exports = {
    sendScript:function (script) {
      if (script && script.name && script.rating){
@@ -47,6 +48,7 @@ var options = {
            // console.log(allUser);
            async.each(allUser, function (val, cb) {
              if (val.fcmId){
+              console.log('response', val.fcmId);
                options["body"]=JSON.stringify(
                  {
                      data: {
@@ -56,6 +58,7 @@ var options = {
                    priority: "high",
                    to : val.fcmId
                  });
+               console.log(options);
                  request(options,function(error, response, body) {
               			if(error){
               				console.log(error);

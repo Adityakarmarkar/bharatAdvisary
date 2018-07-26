@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"BharatAdv.appuser"},{"v":2,"unique":true,"key":{"userName":1},"name":"userName_1","ns":"BharatAdv.appuser","sparse":true},{"v":2,"unique":true,"key":{"mobile":1},"name":"mobile_1","ns":"BharatAdv.appuser","sparse":true}],"uuid":"963abd9735e54afe85368d25c6ec03e7"}
